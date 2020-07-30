@@ -12,7 +12,8 @@
         <ToDoList
           :id="index.toString()"
           :list="note.todoList"
-          :checkboxType="checkboxType"
+          :mutable="todoList.mutable"
+          :checkboxType="todoList.checkboxType"
           @action="toDoListAction"
         ></ToDoList>
       </div>
@@ -35,7 +36,10 @@ export default {
   },
   data () {
     return {
-      checkboxType: 'success'
+      todoList: {
+        mutable: false,
+        checkboxType: 'success'
+      }
     }
   },
   methods: {

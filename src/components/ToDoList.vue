@@ -13,6 +13,7 @@
         :id="checkboxId(index)"
         :label="todo.title"
         :type="checkboxType"
+        :class="{'cursor-init': !mutable}"
       >
       </Checkbox>
     </li>
@@ -28,6 +29,10 @@ export default {
     Checkbox
   },
   props: {
+    checkboxType: {
+      type: String,
+      default: 'success'
+    },
     id: {
       type: String,
       require: true
@@ -36,9 +41,9 @@ export default {
       type: Array,
       default: () => []
     },
-    checkboxType: {
-      type: String,
-      default: 'success'
+    mutable: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -54,16 +59,16 @@ export default {
     }
   },
   methods: {
-    toggleToDoStatus (index) {
+    toggleItemStatus (index) {
       this.list[index].status = !this.list[index].status
     },
     action (event) {
-      const exit = this.missParents.includes(event.target.tagName.toLowerCase())
+      const exit = this.missParents.includes(event.target.tagName.toLowerCase()) || !this.mutable
       if (exit) return
       if (event.target?.control?.id) {
         const checkboxIndexArr = event.target.control.id.split('-')
         const checkboxIndex = parseInt(checkboxIndexArr[checkboxIndexArr.length - 1])
-        this.toggleToDoStatus(checkboxIndex)
+        this.toggleItemStatus(checkboxIndex)
       }
       this.$emit('action', { list: this.list })
     }

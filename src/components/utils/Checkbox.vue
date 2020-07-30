@@ -1,5 +1,5 @@
 <template>
-  <div class="d-inline">
+  <div class="d-inline checkbox-wrap">
     <input
       :id="id"
       :checked="checked"
@@ -15,17 +15,16 @@
 export default {
   name: 'Checkbox',
   model: {
-    prop: 'checked',
-    event: 'change'
+    prop: 'checked'
   },
   props: {
-    id: {
-      type: String,
-      required: true
-    },
     checked: {
       type: Boolean,
       default: false
+    },
+    id: {
+      type: String,
+      required: true
     },
     label: {
       type: String,
