@@ -1,13 +1,69 @@
 <template>
-  <div>
-    <button type="button" class="btn btn-primary">123</button>
-    <button type="button" class="btn btn-success">123</button>
-  </div>
+  <section class="container">
+    <NotesList
+      :list="noteList"
+    ></NotesList>
+  </section>
 </template>
 
 <script>
+import NotesList from '@/components/NotesList'
 export default {
-  name: 'Main'
+  name: 'Main',
+  components: {
+    NotesList
+  },
+  data () {
+    return {
+      noteList: [
+        {
+          name: 'Notes name',
+          todoList: [
+            {
+              status: true,
+              title: 'Todo'
+            }
+          ]
+        },
+        {
+          name: 'Notes name',
+          todoList: [
+            {
+              status: true,
+              title: 'Todo'
+            }
+          ]
+        },
+        {
+          name: 'Notes name',
+          todoList: [
+            {
+              status: true,
+              title: 'Todo'
+            }
+          ]
+        },
+        {
+          name: 'Notes name',
+          todoList: [
+            {
+              status: true,
+              title: 'Todo'
+            }
+          ]
+        },
+        {
+          name: 'Notes name',
+          todoList: [
+            {
+              status: false,
+              title: 'Todo'
+            }
+          ]
+        }
+      ]
+    }
+  }
 }
 </script>
 
