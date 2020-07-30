@@ -2,7 +2,7 @@
   <div class="d-inline">
     <input
       :id="id"
-      :checked="active"
+      :checked="checked"
       :class="classes"
       class="checkbox"
       type="checkbox"
@@ -15,13 +15,13 @@
 export default {
   name: 'Checkbox',
   props: {
-    active: {
-      type: Boolean,
-      default: false
-    },
     id: {
       type: String,
       required: true
+    },
+    checked: {
+      type: Boolean,
+      default: false
     },
     label: {
       type: String,

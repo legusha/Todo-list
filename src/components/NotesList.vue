@@ -1,39 +1,31 @@
 <template>
   <div class="d-flex justify-between flex-wrap notes-list">
     <div
-      v-for="(note, i) in list"
-      :key="i"
+      v-for="(note, index) in list"
+      :key="index"
       class="card mb-3 note"
     >
       <div class="card-title note-title">
         <h3 class="m-0">{{note.name}}</h3>
       </div>
       <div class="card-body note-body">
-        <ul>
-          <li
-            v-for="(todo, index) in note.todoList"
-            :key="index"
-          >
-            <Checkbox
-              :active="todo.status"
-              :id="'checkbox-' + i"
-              :label="todo.title"
-              :type="checkboxType"
-            >
-            </Checkbox>
-          </li>
-        </ul>
+        <ToDoList
+          :id="index.toString()"
+          :list="note.todoList"
+          :checkboxType="checkboxType"
+          @checkboxAction="checkboxAction"
+        ></ToDoList>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Checkbox from '@/components/utils/Checkbox'
+import ToDoList from '@/components/ToDoList'
 export default {
   name: 'NotesList',
   components: {
-    Checkbox
+    ToDoList
   },
   props: {
     list: {
@@ -44,6 +36,10 @@ export default {
   data () {
     return {
       checkboxType: 'success'
+    }
+  },
+  methods: {
+    checkboxAction () {
     }
   }
 }
