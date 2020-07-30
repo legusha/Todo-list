@@ -39,7 +39,7 @@ export default {
     }
   },
   methods: {
-    toDoListAction (list) {
+    toDoListAction (list = []) {
       console.log(list)
     }
   }

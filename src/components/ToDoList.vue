@@ -1,10 +1,12 @@
 <template>
   <ul
-    @click.stop="$emit('action', action($event))"
+    @click.prevent.stop="action($event)"
+    class="todo-list"
   >
     <li
       v-for="(todo, index) in list"
       :key="index"
+      class="todo-list-item p-0 mb-2"
     >
       <Checkbox
         v-model="todo.status"
@@ -39,6 +41,11 @@ export default {
       default: 'success'
     }
   },
+  data () {
+    return {
+      missParents: ['ul', 'li']
+    }
+  },
   computed: {
     checkboxId () {
       return (index) => {
@@ -47,17 +54,27 @@ export default {
     }
   },
   methods: {
+    toggleToDoStatus (index) {
+      this.list[index].status = !this.list[index].status
+    },
     action (event) {
-      console.log(event)
-      console.log(event.target)
-      return {
-        list: this.list
+      const exit = this.missParents.includes(event.target.tagName.toLowerCase())
+      if (exit) return
+      if (event.target?.control?.id) {
+        const checkboxIndexArr = event.target.control.id.split('-')
+        const checkboxIndex = parseInt(checkboxIndexArr[checkboxIndexArr.length - 1])
+        this.toggleToDoStatus(checkboxIndex)
       }
+      this.$emit('action', { list: this.list })
     }
   }
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+  .todo-list {
+    .todo-list-item {
+      list-style-type: none;
+    }
+  }
 </style>
