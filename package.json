@@ -1,5 +1,6 @@
 {
-  "name": "tr_logic_llc",
+  "name": "todo-list",
+  "description": "Test task for TR Logical LLC",
   "version": "0.0.1",
   "scripts": {
     "serve": "vue-cli-service serve",
