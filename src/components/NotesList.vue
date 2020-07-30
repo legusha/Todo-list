@@ -13,7 +13,7 @@
           :id="index.toString()"
           :list="note.todoList"
           :checkboxType="checkboxType"
-          @checkboxAction="checkboxAction"
+          @action="toDoListAction"
         ></ToDoList>
       </div>
     </div>
@@ -39,7 +39,8 @@ export default {
     }
   },
   methods: {
-    checkboxAction () {
+    toDoListAction (list) {
+      console.log(list)
     }
   }
 }

@@ -1,15 +1,16 @@
 <template>
-  <ul>
+  <ul
+    @click.stop="$emit('action', action($event))"
+  >
     <li
       v-for="(todo, index) in list"
       :key="index"
     >
       <Checkbox
-        :id="checkboxId"
-        :checked="todo.status"
+        v-model="todo.status"
+        :id="checkboxId(index)"
         :label="todo.title"
         :type="checkboxType"
-        @click="$emit('checkboxAction', {})"
       >
       </Checkbox>
     </li>
@@ -38,9 +39,20 @@ export default {
       default: 'success'
     }
   },
-  data () {
-    return {
-      checkboxId: `checkbox-${this.id}`
+  computed: {
+    checkboxId () {
+      return (index) => {
+        return `checkbox-${this.id}-${index}`
+      }
+    }
+  },
+  methods: {
+    action (event) {
+      console.log(event)
+      console.log(event.target)
+      return {
+        list: this.list
+      }
     }
   }
 }

@@ -14,6 +14,10 @@
 <script>
 export default {
   name: 'Checkbox',
+  model: {
+    prop: 'checked',
+    event: 'change'
+  },
   props: {
     id: {
       type: String,
