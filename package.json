@@ -1,7 +1,7 @@
 {
-  "name": "tr_logic_llc",
-  "version": "0.1.0",
-  "private": true,
+  "name": "todo-list",
+  "description": "Test task for TR Logical LLC",
+  "version": "0.0.1",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",

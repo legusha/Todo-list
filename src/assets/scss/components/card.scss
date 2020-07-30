@@ -1,0 +1,15 @@
+.card {
+  width: $card-width;
+  border: 1px solid $secondary;
+  .card-title {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 16px;
+    border-bottom: 1px solid $secondary;
+  }
+  .card-body {
+    font-size: 16px;
+    text-align: left;
+    padding: 16px;
+  }
+}
