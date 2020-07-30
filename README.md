@@ -1,4 +1,4 @@
-# tr_logic_llc
+# TR Logical LLC
 
 ## Project setup
 ```
