@@ -16,6 +16,7 @@
           :checkboxType="todoList.checkboxType"
           @action="toDoListAction"
         ></ToDoList>
+        <p v-if="note.todoList.length === 0" class="m-0">Empty todo list</p>
       </div>
     </div>
     <Modal

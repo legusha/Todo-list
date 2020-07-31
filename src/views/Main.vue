@@ -1,19 +1,26 @@
 <template>
   <section id="main" class="container">
-    <div class="main-action text-right pb-4 mb-4">
-      <button class="btn-success btn-big">Add</button>
+    <div v-if="currentView === view.list" class="main-action text-right pb-4 mb-4">
+      <button class="btn-success btn-big" @click="changeView('add')">Add</button>
     </div>
-    <NotesList
-      :list="noteList"
-    ></NotesList>
+    <div v-if="currentView === view.add" class="main-action text-right pb-4 mb-4">
+      <button class="btn-primary btn-big" @click="changeView('list')">Cancel</button>
+    </div>
+    <component
+      :is="currentView"
+      v-bind="{ list: noteList}"
+    ></component>
   </section>
 </template>
 
 <script>
+import NotesAdd from '@/components/NotesAdd'
 import NotesList from '@/components/NotesList'
+
 export default {
   name: 'Main',
   components: {
+    NotesAdd,
     NotesList
   },
   data () {
@@ -68,8 +75,21 @@ export default {
             }
           ]
         }
-      ]
+      ],
+      currentView: '',
+      view: {
+        add: 'NotesAdd',
+        list: 'NotesList'
+      }
     }
+  },
+  methods: {
+    changeView (key) {
+      this.currentView = this.view[key]
+    }
+  },
+  created () {
+    this.changeView('list')
   }
 }
 </script>
