@@ -5,7 +5,7 @@
       :key="index"
       class="card mb-3 note"
     >
-      <div class="card-title note-title">
+      <div class="card-title note-title text-left">
         <h3 class="m-0">{{note.name}}</h3>
       </div>
       <div class="card-body note-body">
@@ -51,7 +51,7 @@ export default {
         mutable: false,
         checkboxType: 'success'
       },
-      modalActive: true
+      modalActive: false
     }
   },
   methods: {

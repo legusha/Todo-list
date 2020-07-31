@@ -1,7 +1,7 @@
 <template>
   <ul
     @click.prevent.stop="action($event)"
-    class="todo-list"
+    class="todo-list p-0"
   >
     <li
       v-for="(todo, index) in list"

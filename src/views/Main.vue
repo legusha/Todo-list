@@ -1,5 +1,8 @@
 <template>
-  <section class="container">
+  <section id="main" class="container">
+    <div class="main-action text-right pb-4 mb-4">
+      <button class="btn-success btn-big">Add</button>
+    </div>
     <NotesList
       :list="noteList"
     ></NotesList>

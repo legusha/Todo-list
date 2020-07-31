@@ -2,7 +2,7 @@
   background-color: transparent;
   color: $white;
   transition: .3s;
-  padding: 12px 18px;
+  padding: 12px 16px;
   font-family: inherit;
   text-align: center;
   font-style: normal;
@@ -18,7 +18,14 @@
   box-shadow: 0 0 4px #999;
   cursor: pointer;
 }
-
+.btn-big {
+  padding: 14px 18px;
+  font-size: 16px;
+}
+.btn-small {
+  padding: 10px 14px;
+  font-size: 12px;
+}
 .btn-success,
 .btn-outline-success,
 {
