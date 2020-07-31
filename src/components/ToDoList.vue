@@ -11,7 +11,7 @@
       <Checkbox
         v-model="todo.status"
         :id="checkboxId(index)"
-        :label="todo.title"
+        :label="todo.title | replaceText(titleMaxSymbol)"
         :type="checkboxType"
         :class="{'cursor-init': !mutable}"
       >
@@ -48,7 +48,8 @@ export default {
   },
   data () {
     return {
-      missParents: ['ul', 'li']
+      missParents: ['ul', 'li'],
+      titleMaxSymbol: 16
     }
   },
   computed: {

@@ -8,7 +8,7 @@
       class="card mb-3 note"
     >
       <div class="card-title note-title text-left d-flex align-center justify-between">
-        <h3 class="m-0">{{note.name}}</h3>
+        <h3 class="m-0">{{note.name | replaceText(noteNameMaxSymbol)}}</h3>
         <div v-if="noteActive === index" class="note-title-action">
           <span class="text-primary cursor-point mr-2">&#9998;</span>
           <span @click="modalOpen(index)" class="text-danger cursor-point">&#10539;</span>
@@ -61,6 +61,7 @@ export default {
         mutable: false,
         checkboxType: 'success'
       },
+      noteNameMaxSymbol: 12,
       noteActive: null,
       noteRemoveIndex: null,
       modalActive: false
@@ -85,12 +86,15 @@ export default {
 <style scoped lang="scss">
   .notes-list {
     .note {
-      flex-basis: 30%;
+      flex-basis: 270px;
       align-self: stretch;
       align-content: stretch;
       .note-title-action {
         font-size: 22px;
       }
+    }
+    .note:first-child{
+      margin-left: 0;
     }
     @media(max-width: 768px) {
       .note {

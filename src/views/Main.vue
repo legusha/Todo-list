@@ -38,7 +38,7 @@ export default {
           ]
         },
         {
-          name: 'Notes name',
+          name: 'Notes name a very big name',
           todoList: [
             {
               status: true,
@@ -47,7 +47,7 @@ export default {
           ]
         },
         {
-          name: 'Notes name',
+          name: 'Notes name a very avery big big name and text',
           todoList: [
             {
               status: true,
@@ -73,7 +73,7 @@ export default {
           todoList: [
             {
               status: false,
-              title: 'Todo'
+              title: 'Its a very very big to do name and other text'
             }
           ]
         }
