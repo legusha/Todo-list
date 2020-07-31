@@ -1,9 +1,9 @@
 <template>
   <section id="main" class="container">
-    <div v-if="currentView === view.list" class="main-action text-right pb-4 mb-4">
+    <div v-if="currentView === listView.list" class="main-action text-right pb-4 mb-4">
       <button class="btn-success btn-big" @click="changeView('add')">Add</button>
     </div>
-    <div v-if="currentView === view.add" class="main-action text-right pb-4 mb-4">
+    <div v-if="currentView === listView.add" class="main-action text-right pb-4 mb-4">
       <button class="btn-primary btn-big" @click="changeView('list')">Cancel</button>
     </div>
     <component
@@ -77,7 +77,7 @@ export default {
         }
       ],
       currentView: '',
-      view: {
+      listView: {
         add: 'NotesAdd',
         list: 'NotesList'
       }
@@ -85,7 +85,7 @@ export default {
   },
   methods: {
     changeView (key) {
-      this.currentView = this.view[key]
+      this.currentView = this.listView[key]
     }
   },
   created () {
