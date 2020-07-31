@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-between flex-wrap notes-list">
+  <div class="d-flex justify-between flex-wrap notes-list p-4 border-secondary">
     <div
       v-for="(note, index) in list"
       :key="index"
@@ -18,16 +18,27 @@
         ></ToDoList>
       </div>
     </div>
+    <Modal
+      v-if="modalActive"
+      :active="modalActive"
+      @close="modalClose"
+    >
+      <template slot="header">
+        <h2>Header modal</h2>
+      </template>
+      <template slot="body">
+        <p>Content modal</p>
+      </template>
+      <template slot="footer">
+        <h2>Footer modal</h2>
+      </template>
+    </Modal>
   </div>
 </template>
 
 <script>
-import ToDoList from '@/components/ToDoList'
 export default {
   name: 'NotesList',
-  components: {
-    ToDoList
-  },
   props: {
     list: {
       type: Array,
@@ -39,12 +50,16 @@ export default {
       todoList: {
         mutable: false,
         checkboxType: 'success'
-      }
+      },
+      modalActive: true
     }
   },
   methods: {
     toDoListAction (list = []) {
       console.log(list)
+    },
+    modalClose () {
+      this.modalActive = false
     }
   }
 }

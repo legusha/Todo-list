@@ -21,6 +21,22 @@
   color: $primary;
 }
 
+.bg-black {
+  background-color: $black;
+}
+.bg-white {
+  background-color: $white;
+}
+.bg-success {
+  background-color: $success;
+}
+.bg-primary {
+  background-color: $primary;
+}
+.bg-secondary {
+  background-color: $secondary;
+}
+
 .p-0 {
   padding: 0;
 }
@@ -186,4 +202,8 @@
 }
 .cursor-point {
   cursor: pointer;
+}
+
+.border-secondary {
+  border: 1px solid $secondary;
 }
