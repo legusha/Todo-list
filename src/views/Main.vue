@@ -9,6 +9,7 @@
     <component
       :is="currentView"
       v-bind="{ list: noteList}"
+      @noteAdd="noteAdd"
     ></component>
   </section>
 </template>
@@ -86,6 +87,18 @@ export default {
   methods: {
     changeView (key) {
       this.currentView = this.listView[key]
+    },
+    noteAdd (name) {
+      const noteByName = this.noteList.find(item => item.name === name)
+      if (noteByName) {
+        return
+      }
+      const newNote = {
+        name,
+        todoList: []
+      }
+      this.noteList.unshift(newNote)
+      this.changeView('list')
     }
   },
   created () {

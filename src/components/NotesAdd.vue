@@ -1,13 +1,25 @@
 <template>
-  <form class="p-4 border-secondary text-left">
-    <input type="text"  class="input-primary" placeholder="Please enter notes name">
-    <button class="btn-outline-success text-black">Save</button>
+  <form  @submit.prevent="noteAdd" class="p-4 border-secondary text-left d-flex justify-between">
+    <input v-model="name" type="text"  class="input-primary input-big mr-4" placeholder="Please enter notes name">
+    <button class="btn-outline-success btn-big text-black" type="submit">Save</button>
   </form>
 </template>
 
 <script>
 export default {
-  name: 'NotesAdd'
+  name: 'NotesAdd',
+  data () {
+    return {
+      name: ''
+    }
+  },
+  methods: {
+    noteAdd () {
+      if (this.name.length === 0) return
+      this.$emit('noteAdd', this.name)
+      this.name = ''
+    }
+  }
 }
 </script>
 
