@@ -3,10 +3,16 @@
     <div
       v-for="(note, index) in list"
       :key="index"
+      @mouseover="noteActive = index"
+      @mouseleave="noteActive = null"
       class="card mb-3 note"
     >
-      <div class="card-title note-title text-left">
+      <div class="card-title note-title text-left d-flex align-center justify-between">
         <h3 class="m-0">{{note.name}}</h3>
+        <div v-if="noteActive === index" class="note-title-action">
+          <span class="text-primary cursor-point mr-2">&#9998;</span>
+          <span @click="modalOpen(index)" class="text-danger cursor-point">&#10539;</span>
+        </div>
       </div>
       <div class="card-body note-body">
         <ToDoList
@@ -25,13 +31,16 @@
       @close="modalClose"
     >
       <template slot="header">
-        <h2>Header modal</h2>
+        <h2>Question:</h2>
       </template>
       <template slot="body">
-        <p>Content modal</p>
+        <h2>Are you sure you want to delete the note?</h2>
       </template>
       <template slot="footer">
-        <h2>Footer modal</h2>
+        <div>
+          <button type="button" class="btn-primary mr-4">Cancel</button>
+          <button @click="$emit('noteRemove', noteRemoveIndex)" type="button" class="btn-success">Accept</button>
+        </div>
       </template>
     </Modal>
   </div>
@@ -52,6 +61,8 @@ export default {
         mutable: false,
         checkboxType: 'success'
       },
+      noteActive: null,
+      noteRemoveIndex: null,
       modalActive: false
     }
   },
@@ -60,7 +71,12 @@ export default {
       console.log(list)
     },
     modalClose () {
+      this.noteRemoveIndex = null
       this.modalActive = false
+    },
+    modalOpen (index) {
+      this.noteRemoveIndex = index
+      this.modalActive = true
     }
   }
 }
@@ -72,6 +88,9 @@ export default {
       flex-basis: 30%;
       align-self: stretch;
       align-content: stretch;
+      .note-title-action {
+        font-size: 22px;
+      }
     }
     @media(max-width: 768px) {
       .note {

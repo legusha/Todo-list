@@ -8,19 +8,19 @@
       <div class="modal">
         <div class="modal-content border-secondary container">
           <div
-            class="modal-header text-white d-flex align-center justify-between bg-secondary p-3">
+            class="modal-header text-black d-flex align-center justify-between bg-secondary p-3">
             <slot name="header"></slot>
             <span
               class="close"
               @click="$emit('close')"
             >
-          &times;
+          &#10539;
         </span>
           </div>
-          <div class="modal-body bg-white p-3">
+          <div class="modal-body text-black bg-white p-3">
             <slot name="body"></slot>
           </div>
-          <div class="modal-footer text-white bg-secondary p-3">
+          <div class="modal-footer text-black bg-secondary p-3">
             <slot name="footer"></slot>
           </div>
         </div>
@@ -98,7 +98,7 @@ export default {
     }
     .close:hover,
     .close:focus {
-      color: $white;
+      color: $danger;
       text-decoration: none;
       cursor: pointer;
     }

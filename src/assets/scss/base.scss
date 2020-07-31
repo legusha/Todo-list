@@ -20,6 +20,12 @@
 .text-primary {
   color: $primary;
 }
+.text-secondary {
+  color: $secondary;
+}
+.text-danger {
+  color: $danger;
+}
 
 .bg-black {
   background-color: $black;
@@ -35,6 +41,9 @@
 }
 .bg-secondary {
   background-color: $secondary;
+}
+.bg-danger {
+  background-color: $danger;
 }
 
 .p-0 {
@@ -206,4 +215,17 @@
 
 .border-secondary {
   border: 1px solid $secondary;
+}
+
+.f-size-1 {
+  font-size: 12px;
+}
+.f-size-2 {
+  font-size: 14px;
+}
+.f-size-3 {
+  font-size: 16px;
+}
+.f-size-4 {
+  font-size: 18px;
 }

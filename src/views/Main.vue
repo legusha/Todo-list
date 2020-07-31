@@ -10,6 +10,7 @@
       :is="currentView"
       v-bind="{ list: noteList}"
       @noteAdd="noteAdd"
+      @noteRemove="noteRemove"
     ></component>
   </section>
 </template>
@@ -99,6 +100,9 @@ export default {
       }
       this.noteList.unshift(newNote)
       this.changeView('list')
+    },
+    noteRemove (index) {
+      this.noteList.splice(index, 1)
     }
   },
   created () {
