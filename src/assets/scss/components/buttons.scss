@@ -77,3 +77,8 @@
   background-size: 100%;
   transition: background 0s;
 }
+
+.btn-outline-primary:hover,
+.btn-outline-success:hover {
+  color: $white;
+}
