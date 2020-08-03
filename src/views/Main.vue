@@ -8,7 +8,7 @@
     </div>
     <component
       :is="currentView"
-      v-bind="{ list: noteList}"
+      v-bind="{ list: notesList}"
       @noteAdd="noteAdd"
       @noteRemove="noteRemove"
     ></component>
@@ -18,6 +18,7 @@
 <script>
 import NotesAdd from '@/components/NotesAdd'
 import NotesList from '@/components/NotesList'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Main',
@@ -27,57 +28,6 @@ export default {
   },
   data () {
     return {
-      noteList: [
-        {
-          name: 'Notes name',
-          todoList: [
-            {
-              status: true,
-              title: 'Todo'
-            }
-          ]
-        },
-        {
-          name: 'Notes name a very big name',
-          todoList: [
-            {
-              status: true,
-              title: 'Todo'
-            }
-          ]
-        },
-        {
-          name: 'Notes name a very avery big big name and text',
-          todoList: [
-            {
-              status: true,
-              title: 'Todo'
-            }
-          ]
-        },
-        {
-          name: 'Notes name',
-          todoList: [
-            {
-              status: true,
-              title: 'Todo'
-            },
-            {
-              status: false,
-              title: 'Todo2'
-            }
-          ]
-        },
-        {
-          name: 'Notes name',
-          todoList: [
-            {
-              status: false,
-              title: 'Its a very very big to do name and other text'
-            }
-          ]
-        }
-      ],
       currentView: '',
       listView: {
         add: 'NotesAdd',
@@ -85,12 +35,15 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapGetters(['notesList'])
+  },
   methods: {
     changeView (key) {
       this.currentView = this.listView[key]
     },
     noteAdd (name) {
-      const noteByName = this.noteList.find(item => item.name === name)
+      const noteByName = this.notesList.find(item => item.name === name)
       if (noteByName) {
         return
       }
@@ -98,11 +51,11 @@ export default {
         name,
         todoList: []
       }
-      this.noteList.unshift(newNote)
+      this.notesList.unshift(newNote)
       this.changeView('list')
     },
     noteRemove (index) {
-      this.noteList.splice(index, 1)
+      this.notesList.splice(index, 1)
     }
   },
   created () {
