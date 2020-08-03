@@ -1,17 +1,20 @@
 import Vue from 'vue'
-import App from './App.vue'
+import App from '@/App.vue'
+import store from '@/store'
+import router from '@/router'
 import './registerServiceWorker'
-import router from './router'
 
 import '@/assets/scss/main.scss'
 
 import ToDoList from '@/components/ToDoList'
-import Modal from '@/components/utils/Modal'
+import Modal from '@/components/ui/Modal'
+import Icon from '@/components/ui/Icon'
 
 /** Global components **/
 
 Vue.component('ToDoList', ToDoList)
 Vue.component('Modal', Modal)
+Vue.component('Icon', Icon)
 
 /** Global filters **/
 
@@ -30,5 +33,6 @@ Vue.config.productionTip = false
 
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app')

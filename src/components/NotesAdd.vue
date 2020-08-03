@@ -1,7 +1,7 @@
 <template>
   <form  @submit.prevent="noteAdd" class="p-4 border-secondary text-left d-flex justify-between">
     <input v-model="name" type="text"  class="input-primary input-big mr-4" placeholder="Please enter notes name">
-    <button class="btn-outline-success btn-big text-black" type="submit">Save</button>
+    <button class="btn-outline-success btn-big text-black bg-white" type="submit">Add</button>
   </form>
 </template>
 

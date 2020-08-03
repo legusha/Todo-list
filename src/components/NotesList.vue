@@ -5,13 +5,21 @@
       :key="index"
       @mouseover="noteActive = index"
       @mouseleave="noteActive = null"
-      class="card mb-3 note"
+      class="card mb-3 note bg-white"
     >
-      <div class="card-title note-title text-left d-flex align-center justify-between">
+      <div class="card-title note-title text-left d-flex align-center justify-between bg-secondary">
         <h3 class="m-0">{{note.name | replaceText(noteNameMaxSymbol)}}</h3>
         <div v-if="noteActive === index" class="note-title-action">
-          <span class="text-primary cursor-point mr-2">&#9998;</span>
-          <span @click="modalOpen(index)" class="text-danger cursor-point">&#10539;</span>
+          <Icon
+            :symbol="icon.edit"
+            @action="$router.push({name: 'Note', params: { id: (++index).toString() }})"
+            class="text-primary mr-2"
+          ></Icon>
+          <Icon
+            :symbol="icon.remove"
+            @action="modalOpen(index)"
+            class="text-danger"
+          ></Icon>
         </div>
       </div>
       <div class="card-body note-body">
@@ -31,15 +39,15 @@
       @close="modalClose"
     >
       <template slot="header">
-        <h2>Question:</h2>
+        <h2 class="m-0">Question:</h2>
       </template>
       <template slot="body">
         <h2>Are you sure you want to delete the note?</h2>
       </template>
       <template slot="footer">
         <div>
-          <button type="button" class="btn-primary mr-4">Cancel</button>
-          <button @click="$emit('noteRemove', noteRemoveIndex)" type="button" class="btn-success">Accept</button>
+          <button @click="modalClose" type="button" class="btn-primary mr-4">Cancel</button>
+          <button @click="$emit('noteRemove', noteCurrentIndex)" type="button" class="btn-success">Accept</button>
         </div>
       </template>
     </Modal>
@@ -61,9 +69,13 @@ export default {
         mutable: false,
         checkboxType: 'success'
       },
+      icon: {
+        edit: '&#9998;',
+        remove: '&#10539;'
+      },
       noteNameMaxSymbol: 12,
       noteActive: null,
-      noteRemoveIndex: null,
+      noteCurrentIndex: null,
       modalActive: false
     }
   },
@@ -72,11 +84,11 @@ export default {
       console.log(list)
     },
     modalClose () {
-      this.noteRemoveIndex = null
+      this.noteCurrentIndex = null
       this.modalActive = false
     },
     modalOpen (index) {
-      this.noteRemoveIndex = index
+      this.noteCurrentIndex = index
       this.modalActive = true
     }
   }

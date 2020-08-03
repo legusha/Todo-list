@@ -2,10 +2,12 @@
   cursor: pointer;
   .checkbox {
     position: absolute;
+    cursor: inherit;
     opacity: 0;
     & + label {
       position: relative;
       padding: 0;
+      cursor: inherit;
     }
     & + label:before {
       content: '';
@@ -14,18 +16,18 @@
       vertical-align: text-top;
       width: 20px;
       height: 20px;
-      background: white;
+      background: $secondary;
     }
     &:focus + label:before {
       box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
     }
     &:disabled + label {
-      color: #b8b8b8;
+      color: $secondary-extra;
       cursor: auto;
     }
     &:disabled + label:before {
       box-shadow: none;
-      background: #ddd;
+      background: $secondary;
     }
     &:checked + label:after {
       content: '';
@@ -50,18 +52,14 @@
     @extend .checkbox;
     &:checked + label:before {
       background: $success;
-    }
-    &:checked + label:before {
-      background: $success;
+      box-shadow: $secondary-shadow;
     }
   }
   .checkbox-primary {
     @extend .checkbox;
     &:checked + label:before {
       background: $primary;
-    }
-    &:checked + label:before {
-      background: $primary;
+      box-shadow: $secondary-shadow;
     }
   }
 }

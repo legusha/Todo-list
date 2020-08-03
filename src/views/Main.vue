@@ -1,16 +1,17 @@
 <template>
-  <section id="main" class="container">
-    <div v-if="currentView === listView.list" class="main-action text-right pb-4 mb-4">
+  <section class="container main">
+    <div v-if="currentView === listView.list" class="main-action text-left mb-4 p-4 border-secondary bg-secondary">
       <button class="btn-success btn-big" @click="changeView('add')">Add</button>
     </div>
-    <div v-if="currentView === listView.add" class="main-action text-right pb-4 mb-4">
+    <div v-if="currentView === listView.add" class="main-action text-right mb-4 p-4 border-secondary bg-secondary">
       <button class="btn-primary btn-big" @click="changeView('list')">Cancel</button>
     </div>
     <component
       :is="currentView"
-      v-bind="{ list: noteList}"
-      @noteAdd="noteAdd"
-      @noteRemove="noteRemove"
+      v-bind="{ list: notesList}"
+      @noteAdd="addToNotesList"
+      @noteRemove="removeFromNotesList"
+      class="border-secondary"
     ></component>
   </section>
 </template>
@@ -18,6 +19,7 @@
 <script>
 import NotesAdd from '@/components/NotesAdd'
 import NotesList from '@/components/NotesList'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'Main',
@@ -27,57 +29,6 @@ export default {
   },
   data () {
     return {
-      noteList: [
-        {
-          name: 'Notes name',
-          todoList: [
-            {
-              status: true,
-              title: 'Todo'
-            }
-          ]
-        },
-        {
-          name: 'Notes name a very big name',
-          todoList: [
-            {
-              status: true,
-              title: 'Todo'
-            }
-          ]
-        },
-        {
-          name: 'Notes name a very avery big big name and text',
-          todoList: [
-            {
-              status: true,
-              title: 'Todo'
-            }
-          ]
-        },
-        {
-          name: 'Notes name',
-          todoList: [
-            {
-              status: true,
-              title: 'Todo'
-            },
-            {
-              status: false,
-              title: 'Todo2'
-            }
-          ]
-        },
-        {
-          name: 'Notes name',
-          todoList: [
-            {
-              status: false,
-              title: 'Its a very very big to do name and other text'
-            }
-          ]
-        }
-      ],
       currentView: '',
       listView: {
         add: 'NotesAdd',
@@ -85,24 +36,24 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapGetters(['notesList'])
+  },
   methods: {
+    ...mapMutations(['addNote', 'removeNote']),
     changeView (key) {
       this.currentView = this.listView[key]
     },
-    noteAdd (name) {
-      const noteByName = this.noteList.find(item => item.name === name)
+    addToNotesList (name) {
+      const noteByName = this.notesList.find(item => item.name === name)
       if (noteByName) {
         return
       }
-      const newNote = {
-        name,
-        todoList: []
-      }
-      this.noteList.unshift(newNote)
+      this.addNote({ name })
       this.changeView('list')
     },
-    noteRemove (index) {
-      this.noteList.splice(index, 1)
+    removeFromNotesList (index) {
+      this.removeNote({ index })
     }
   },
   created () {
