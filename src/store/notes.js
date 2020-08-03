@@ -50,10 +50,12 @@ export default {
           }
         ]
       }
-    ]
+    ],
+    noteCurrent: null
   },
   getters: {
-    notesList: state => state.notesList
+    notesList: state => state.notesList,
+    noteCurrent: state => state.noteCurrent
   },
   mutations: {
     addNote (state, { name }) {
@@ -65,6 +67,13 @@ export default {
     },
     removeNote (state, { index }) {
       state.notesList.splice(index, 1)
+    },
+    updateNote (state, { index, note }) {
+      state.notesList.splice(index, 1, note)
+    },
+    writeNoteCurrent (state, note) {
+      note = JSON.parse(JSON.stringify(note)) // disable reactivity
+      state.noteCurrent = note
     }
   }
 }

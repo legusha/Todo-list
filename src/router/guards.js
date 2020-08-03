@@ -7,6 +7,7 @@ export default {
       const note = store.getters.notesList[--id]
       const isId = id === 0 ? true : id
       if (isId && note) {
+        store.commit('writeNoteCurrent', note)
         next()
         return
       }

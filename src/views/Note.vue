@@ -5,20 +5,17 @@
         <h3 class="m-0">{{note.name | replaceText(noteNameMaxSymbol)}}</h3>
         <div class="note-title-action">
           <Icon
-            :symbol="icon.edit"
-            @action="iconAction"
+            v-for="icon in icons"
+            :key="icon.symbol"
+            :symbol="icon.symbol"
+            @action="icon.handler"
             class="text-primary mr-2"
-          ></Icon>
-          <Icon
-            :symbol="icon.remove"
-            @action="iconAction"
-            class="text-danger"
           ></Icon>
         </div>
       </div>
       <div class="card-body note-body">
         <ToDoList
-          :id="id.toString()"
+          :id="index.toString()"
           :list="note.todoList"
           :mutable="todoList.mutable"
           :checkboxType="todoList.checkboxType"
@@ -31,7 +28,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'Note',
   data () {
@@ -41,27 +38,38 @@ export default {
         checkboxType: 'success'
       },
       noteNameMaxSymbol: 36,
-      icon: {
-        edit: '&#9998;',
-        remove: '&#10539;'
+      icons: {
+        edit: {
+          symbol: '&#9998;',
+          handler: this.saveNote
+        },
+        remove: {
+          symbol: '&#10539;',
+          handler: this.removeNoteLocal
+        }
       }
     }
   },
   computed: {
-    ...mapGetters(['notesList']),
-    id () {
+    ...mapGetters(['noteCurrent']),
+    index () {
       const radix = 10
       return parseInt(this.$route.params.id, radix) - 1
     },
     note () {
-      return this.notesList[this.id]
+      return this.noteCurrent
     }
   },
   methods: {
+    ...mapMutations(['updateNote', 'removeNote']),
     toDoListAction (list = []) {
       console.log(list)
     },
-    iconAction () {
+    saveNote () {
+      this.updateNote({ index: this.index, note: this.note })
+    },
+    removeNoteLocal () {
+      this.removeNote({ index: this.index })
     }
   }
 }
