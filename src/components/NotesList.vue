@@ -10,7 +10,7 @@
       <div class="card-title note-title text-left d-flex align-center justify-between">
         <h3 class="m-0">{{note.name | replaceText(noteNameMaxSymbol)}}</h3>
         <div v-if="noteActive === index" class="note-title-action">
-          <span class="text-primary cursor-point mr-2">&#9998;</span>
+          <span @click="$router.push({name: 'Note', params: { id: (++index).toString() }})" class="text-primary cursor-point mr-2">&#9998;</span>
           <span @click="modalOpen(index)" class="text-danger cursor-point">&#10539;</span>
         </div>
       </div>

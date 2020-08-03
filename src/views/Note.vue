@@ -3,8 +3,12 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
-  name: 'Note'
+  name: 'Note',
+  computed: {
+    ...mapGetters(['notesList'])
+  }
 }
 </script>
 

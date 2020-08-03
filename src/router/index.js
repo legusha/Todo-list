@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '@/store'
+import guards from '@/router/guards'
 
 import Main from '@/views/Main.vue'
 import Note from '@/views/Note.vue'
@@ -13,9 +15,15 @@ const routes = [
     component: Main
   },
   {
-    path: '/note',
+    path: '/note/:id',
     name: 'Note',
-    component: Note
+    component: Note,
+    props: true,
+    beforeEnter: guards.note.bind(null, store)
+  },
+  {
+    path: '*',
+    redirect: '/'
   }
 ]
 
