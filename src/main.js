@@ -8,11 +8,13 @@ import '@/assets/scss/main.scss'
 
 import ToDoList from '@/components/ToDoList'
 import Modal from '@/components/utils/Modal'
+import Icon from '@/components/utils/Icon'
 
 /** Global components **/
 
 Vue.component('ToDoList', ToDoList)
 Vue.component('Modal', Modal)
+Vue.component('Icon', Icon)
 
 /** Global filters **/
 

@@ -2,10 +2,12 @@
   cursor: pointer;
   .checkbox {
     position: absolute;
+    cursor: inherit;
     opacity: 0;
     & + label {
       position: relative;
       padding: 0;
+      cursor: inherit;
     }
     & + label:before {
       content: '';

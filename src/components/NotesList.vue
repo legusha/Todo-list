@@ -10,8 +10,16 @@
       <div class="card-title note-title text-left d-flex align-center justify-between">
         <h3 class="m-0">{{note.name | replaceText(noteNameMaxSymbol)}}</h3>
         <div v-if="noteActive === index" class="note-title-action">
-          <span @click="$router.push({name: 'Note', params: { id: (++index).toString() }})" class="text-primary cursor-point mr-2">&#9998;</span>
-          <span @click="modalOpen(index)" class="text-danger cursor-point">&#10539;</span>
+          <Icon
+            :symbol="icon.edit"
+            @action="$router.push({name: 'Note', params: { id: (++index).toString() }})"
+            class="text-primary mr-2"
+          ></Icon>
+          <Icon
+            :symbol="icon.remove"
+            @action="modalOpen(index)"
+            class="text-danger"
+          ></Icon>
         </div>
       </div>
       <div class="card-body note-body">
@@ -60,6 +68,10 @@ export default {
       todoList: {
         mutable: false,
         checkboxType: 'success'
+      },
+      icon: {
+        edit: '&#9998;',
+        remove: '&#10539;'
       },
       noteNameMaxSymbol: 12,
       noteActive: null,

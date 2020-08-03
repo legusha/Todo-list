@@ -2,7 +2,8 @@ export default {
   note: (store, to, from, next) => {
     const isHasId = to.params?.id
     if (isHasId) {
-      let id = parseInt(to.params.id) || false
+      const radix = 10
+      let id = parseInt(to.params.id, radix) || false
       if (!id) {
         next({ name: 'Main' })
         return
@@ -12,7 +13,7 @@ export default {
         next({ name: 'Main' })
         return
       }
-      next()
+      next({ props: { id, note } })
       return
     }
     next({ name: 'Main' })

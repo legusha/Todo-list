@@ -1,5 +1,5 @@
 <template>
-  <section id="main" class="container">
+  <section class="container main">
     <div v-if="currentView === listView.list" class="main-action text-right pb-4 mb-4">
       <button class="btn-success btn-big" @click="changeView('add')">Add</button>
     </div>
