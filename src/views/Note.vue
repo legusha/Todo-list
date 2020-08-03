@@ -1,7 +1,7 @@
 <template>
   <section class="container note-wrap">
     <div class="card mb-3 note">
-      <div class="card-title note-title text-left d-flex align-center justify-between">
+      <div class="card-title note-title text-left d-flex align-center justify-between bg-secondary">
         <h3 class="m-0">{{note.name | replaceText(noteNameMaxSymbol)}}</h3>
         <div class="note-title-action">
           <Icon

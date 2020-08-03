@@ -37,13 +37,13 @@ export default {
       type: String,
       require: true
     },
-    list: {
-      type: Array,
-      default: () => []
-    },
     mutable: {
       type: Boolean,
       default: true
+    },
+    list: {
+      type: Array,
+      default: () => []
     }
   },
   data () {

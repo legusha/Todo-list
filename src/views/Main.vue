@@ -9,8 +9,8 @@
     <component
       :is="currentView"
       v-bind="{ list: notesList}"
-      @noteAdd="addNoteLocal"
-      @noteRemove="removeNoteLocal"
+      @noteAdd="addToNotesList"
+      @noteRemove="removeFromNotesList"
     ></component>
   </section>
 </template>
@@ -43,7 +43,7 @@ export default {
     changeView (key) {
       this.currentView = this.listView[key]
     },
-    addNoteLocal (name) {
+    addToNotesList (name) {
       const noteByName = this.notesList.find(item => item.name === name)
       if (noteByName) {
         return
@@ -51,7 +51,7 @@ export default {
       this.addNote({ name })
       this.changeView('list')
     },
-    removeNoteLocal (index) {
+    removeFromNotesList (index) {
       this.removeNote({ index })
     }
   },

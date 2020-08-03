@@ -7,7 +7,7 @@
       @mouseleave="noteActive = null"
       class="card mb-3 note"
     >
-      <div class="card-title note-title text-left d-flex align-center justify-between">
+      <div class="card-title note-title text-left d-flex align-center justify-between bg-secondary">
         <h3 class="m-0">{{note.name | replaceText(noteNameMaxSymbol)}}</h3>
         <div v-if="noteActive === index" class="note-title-action">
           <Icon
@@ -47,7 +47,7 @@
       <template slot="footer">
         <div>
           <button type="button" class="btn-primary mr-4">Cancel</button>
-          <button @click="$emit('noteRemove', noteRemoveIndex)" type="button" class="btn-success">Accept</button>
+          <button @click="$emit('noteRemove', noteCurrentIndex)" type="button" class="btn-success">Accept</button>
         </div>
       </template>
     </Modal>
@@ -75,7 +75,7 @@ export default {
       },
       noteNameMaxSymbol: 12,
       noteActive: null,
-      noteRemoveIndex: null,
+      noteCurrentIndex: null,
       modalActive: false
     }
   },
@@ -84,11 +84,11 @@ export default {
       console.log(list)
     },
     modalClose () {
-      this.noteRemoveIndex = null
+      this.noteCurrentIndex = null
       this.modalActive = false
     },
     modalOpen (index) {
-      this.noteRemoveIndex = index
+      this.noteCurrentIndex = index
       this.modalActive = true
     }
   }
