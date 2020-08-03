@@ -56,5 +56,15 @@ export default {
     notesList: state => state.notesList
   },
   mutations: {
+    addNote (state, { name }) {
+      const newNote = {
+        name,
+        todoList: []
+      }
+      state.notesList.unshift(newNote)
+    },
+    removeNote (state, { index }) {
+      state.notesList.splice(index, 1)
+    }
   }
 }

@@ -9,8 +9,8 @@
     <component
       :is="currentView"
       v-bind="{ list: notesList}"
-      @noteAdd="noteAdd"
-      @noteRemove="noteRemove"
+      @noteAdd="addNoteLocal"
+      @noteRemove="removeNoteLocal"
     ></component>
   </section>
 </template>
@@ -18,7 +18,7 @@
 <script>
 import NotesAdd from '@/components/NotesAdd'
 import NotesList from '@/components/NotesList'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'Main',
@@ -39,23 +39,20 @@ export default {
     ...mapGetters(['notesList'])
   },
   methods: {
+    ...mapMutations(['addNote', 'removeNote']),
     changeView (key) {
       this.currentView = this.listView[key]
     },
-    noteAdd (name) {
+    addNoteLocal (name) {
       const noteByName = this.notesList.find(item => item.name === name)
       if (noteByName) {
         return
       }
-      const newNote = {
-        name,
-        todoList: []
-      }
-      this.notesList.unshift(newNote)
+      this.addNote({ name })
       this.changeView('list')
     },
-    noteRemove (index) {
-      this.notesList.splice(index, 1)
+    removeNoteLocal (index) {
+      this.removeNote({ index })
     }
   },
   created () {
