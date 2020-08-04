@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import Checkbox from '@/components/utils/Checkbox'
+import Checkbox from '@/components/ui/Checkbox'
 
 export default {
   name: 'ToDoList',

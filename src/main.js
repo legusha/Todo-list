@@ -7,8 +7,8 @@ import './registerServiceWorker'
 import '@/assets/scss/main.scss'
 
 import ToDoList from '@/components/ToDoList'
-import Modal from '@/components/utils/Modal'
-import Icon from '@/components/utils/Icon'
+import Modal from '@/components/ui/Modal'
+import Icon from '@/components/ui/Icon'
 
 /** Global components **/
 

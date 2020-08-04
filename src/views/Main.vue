@@ -1,9 +1,9 @@
 <template>
   <section class="container main">
-    <div v-if="currentView === listView.list" class="main-action text-right pb-4 mb-4">
+    <div v-if="currentView === listView.list" class="main-action text-left mb-4 p-4 border-secondary bg-secondary">
       <button class="btn-success btn-big" @click="changeView('add')">Add</button>
     </div>
-    <div v-if="currentView === listView.add" class="main-action text-right pb-4 mb-4">
+    <div v-if="currentView === listView.add" class="main-action text-right mb-4 p-4 border-secondary bg-secondary">
       <button class="btn-primary btn-big" @click="changeView('list')">Cancel</button>
     </div>
     <component
@@ -11,6 +11,7 @@
       v-bind="{ list: notesList}"
       @noteAdd="addToNotesList"
       @noteRemove="removeFromNotesList"
+      class="border-secondary"
     ></component>
   </section>
 </template>

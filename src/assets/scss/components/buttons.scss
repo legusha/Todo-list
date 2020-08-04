@@ -15,7 +15,7 @@
   border: 1px solid transparent;
   display: inline-block;
   background-position: center;
-  box-shadow: 0 0 4px #999;
+  box-shadow: $secondary-shadow;
   cursor: pointer;
 }
 .btn-big {

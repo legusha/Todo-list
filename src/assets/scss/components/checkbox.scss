@@ -52,18 +52,14 @@
     @extend .checkbox;
     &:checked + label:before {
       background: $success;
-    }
-    &:checked + label:before {
-      background: $success;
+      box-shadow: $secondary-shadow;
     }
   }
   .checkbox-primary {
     @extend .checkbox;
     &:checked + label:before {
       background: $primary;
-    }
-    &:checked + label:before {
-      background: $primary;
+      box-shadow: $secondary-shadow;
     }
   }
 }

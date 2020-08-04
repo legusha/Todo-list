@@ -1,14 +1,13 @@
 <template>
   <div
     :class="{'modal-wrap-active': active}"
-    @click="$emit('close')"
     class="modal-wrap"
   >
+    <div @click.stop="$emit('close')" class="modal-bg"></div>
     <div class="container d-flex align-center">
       <div class="modal">
         <div class="modal-content border-secondary container">
-          <div
-            class="modal-header text-black d-flex align-center justify-between bg-secondary p-3">
+          <div class="modal-header text-black d-flex align-center justify-between bg-secondary p-3">
             <slot name="header"></slot>
             <span
               class="close"
@@ -46,13 +45,18 @@ export default {
 
   .modal-wrap {
     height: 100%;
-    background-color: rgba(52, 58, 74, 0.7);
     position: fixed;
     left: 0;
     right: 0;
     top: 0;
     display: none;
     cursor: pointer;
+    .modal-bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(52, 58, 74, 0.7);
+    }
     .container {
       height: 100%;
     }
@@ -64,6 +68,7 @@ export default {
       position: relative;
       margin: auto;
       padding: 0;
+      background-color: $secondary;
       box-shadow:  0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);;
       -webkit-animation-name: animatetop;
       -webkit-animation-duration: 0.4s;
@@ -105,5 +110,8 @@ export default {
   }
   .modal-wrap-active {
     display: block;
+  }
+  .modal-header, .modal-footer {
+    min-height: 75px;
   }
 </style>

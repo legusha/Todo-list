@@ -5,7 +5,7 @@
       :key="index"
       @mouseover="noteActive = index"
       @mouseleave="noteActive = null"
-      class="card mb-3 note"
+      class="card mb-3 note bg-white"
     >
       <div class="card-title note-title text-left d-flex align-center justify-between bg-secondary">
         <h3 class="m-0">{{note.name | replaceText(noteNameMaxSymbol)}}</h3>
@@ -39,14 +39,14 @@
       @close="modalClose"
     >
       <template slot="header">
-        <h2>Question:</h2>
+        <h2 class="m-0">Question:</h2>
       </template>
       <template slot="body">
         <h2>Are you sure you want to delete the note?</h2>
       </template>
       <template slot="footer">
         <div>
-          <button type="button" class="btn-primary mr-4">Cancel</button>
+          <button @click="modalClose" type="button" class="btn-primary mr-4">Cancel</button>
           <button @click="$emit('noteRemove', noteCurrentIndex)" type="button" class="btn-success">Accept</button>
         </div>
       </template>
