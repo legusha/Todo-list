@@ -27,7 +27,7 @@
           :id="index.toString()"
           :list="note.todoList"
           :mutable="todoList.mutable"
-          :checkboxType="todoList.checkboxType"
+          :checkboxColor="todoList.checkboxColor"
           @action="toDoListAction"
         ></ToDoList>
         <p v-if="note.todoList.length === 0" class="m-0">Empty todo list</p>
@@ -47,7 +47,7 @@
       <template slot="footer">
         <div>
           <button @click="modalClose" type="button" class="btn-primary mr-4">Cancel</button>
-          <button @click="$emit('noteRemove', noteCurrentIndex)" type="button" class="btn-success">Accept</button>
+          <button @click="modalAccept" type="button" class="btn-success">Accept</button>
         </div>
       </template>
     </Modal>
@@ -67,7 +67,7 @@ export default {
     return {
       todoList: {
         mutable: false,
-        checkboxType: 'success'
+        checkboxColor: 'success'
       },
       icon: {
         edit: '&#9998;',
@@ -90,6 +90,10 @@ export default {
     modalOpen (index) {
       this.noteCurrentIndex = index
       this.modalActive = true
+    },
+    modalAccept () {
+      this.$emit('noteRemove', this.noteCurrentIndex)
+      this.modalClose()
     }
   }
 }

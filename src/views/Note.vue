@@ -18,7 +18,7 @@
           :id="index.toString()"
           :list="note.todoList"
           :mutable="todoList.mutable"
-          :checkboxType="todoList.checkboxType"
+          :checkboxColor="todoList.checkboxColor"
           @action="toDoListAction"
         ></ToDoList>
         <p v-if="note.todoList.length === 0" class="m-0">Empty todo list</p>
@@ -35,17 +35,19 @@ export default {
     return {
       todoList: {
         mutable: true,
-        checkboxType: 'success'
+        checkboxColor: 'success'
       },
       noteNameMaxSymbol: 36,
       icons: {
         edit: {
           symbol: '&#9998;',
-          handler: this.saveNote
+          handler: this.saveNote,
+          color: 'success'
         },
         remove: {
           symbol: '&#10539;',
-          handler: this.removeNoteLocal
+          handler: this.removeNoteLocal,
+          color: 'warning'
         }
       }
     }

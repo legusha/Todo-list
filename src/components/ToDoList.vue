@@ -12,7 +12,7 @@
         v-model="todo.status"
         :id="checkboxId(index)"
         :label="todo.title | replaceText(titleMaxSymbol)"
-        :type="checkboxType"
+        :type="checkboxColor"
         :class="{'cursor-init': !mutable}"
       >
       </Checkbox>
@@ -29,7 +29,7 @@ export default {
     Checkbox
   },
   props: {
-    checkboxType: {
+    checkboxColor: {
       type: String,
       default: 'success'
     },
