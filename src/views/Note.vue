@@ -18,7 +18,6 @@
           :id="index.toString()"
           :list="note.todoList"
           :mutable="todoList.mutable"
-          :checkboxColor="todoList.checkboxColor"
           @action="toDoListAction"
         ></ToDoList>
         <p v-if="note.todoList.length === 0" class="m-0">Empty todo list</p>

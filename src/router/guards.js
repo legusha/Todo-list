@@ -1,5 +1,5 @@
 export default {
-  note: (store, to, from, next) => {
+  note (store, to, from, next) {
     const isHasId = to.params?.id
     if (isHasId) {
       const radix = 10

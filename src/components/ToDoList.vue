@@ -12,8 +12,8 @@
         v-model="todo.status"
         :id="checkboxId(index)"
         :label="todo.title | replaceText(titleMaxSymbol)"
-        :type="checkboxColor"
         :class="{'cursor-init': !mutable}"
+        :ui="checkBoxUI"
       >
       </Checkbox>
     </li>
@@ -29,10 +29,6 @@ export default {
     Checkbox
   },
   props: {
-    checkboxColor: {
-      type: String,
-      default: 'success'
-    },
     id: {
       type: String,
       require: true
@@ -49,7 +45,11 @@ export default {
   data () {
     return {
       missParents: ['ul', 'li'],
-      titleMaxSymbol: 16
+      titleMaxSymbol: 16,
+      checkBoxUI: {
+        startClass: 'checkbox-',
+        color: 'success'
+      }
     }
   },
   computed: {

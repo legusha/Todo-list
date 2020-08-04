@@ -3,7 +3,7 @@
     <input
       :id="id"
       :checked="checked"
-      :class="classes"
+      :class="concatClass"
       class="checkbox"
       type="checkbox"
     >
@@ -12,8 +12,10 @@
 </template>
 
 <script>
+import { ui } from '@/mixin'
 export default {
   name: 'Checkbox',
+  mixins: [ui],
   model: {
     prop: 'checked'
   },
@@ -29,10 +31,6 @@ export default {
     label: {
       type: String,
       default: ''
-    },
-    type: {
-      type: String,
-      default: 'success'
     }
   },
   data () {
