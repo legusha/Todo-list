@@ -3,7 +3,7 @@
     <input
       :id="id"
       :checked="checked"
-      :class="concatClass"
+      :class="uiClass"
       class="checkbox"
       type="checkbox"
     >

@@ -8,8 +8,9 @@
             v-for="icon in icons"
             :key="icon.symbol"
             :symbol="icon.symbol"
+            :ui="{className: icon.className}"
             @action="icon.handler"
-            class="text-primary mr-2"
+            class="mr-2"
           ></Icon>
         </div>
       </div>
@@ -33,20 +34,19 @@ export default {
   data () {
     return {
       todoList: {
-        mutable: true,
-        checkboxColor: 'success'
+        mutable: true
       },
       noteNameMaxSymbol: 36,
       icons: {
         edit: {
           symbol: '&#9998;',
           handler: this.saveNote,
-          color: 'success'
+          className: 'text-success'
         },
         remove: {
           symbol: '&#10539;',
           handler: this.removeNoteLocal,
-          color: 'warning'
+          className: 'text-danger'
         }
       }
     }

@@ -4,18 +4,16 @@ export const ui = {
       type: Object,
       default () {
         return {
-          element: 'bg',
-          color: 'initial'
+          className: 'initial'
         }
       }
     }
   },
   computed: {
-    concatClass () {
+    uiClass () {
       const classes = {}
-      const ui = this.ui
-      const color = `${ui.element}-${ui.color}`
-      classes[color] = color
+      const className = this.ui.className
+      classes[className] = className
       return classes
     }
   }

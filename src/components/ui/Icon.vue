@@ -2,7 +2,7 @@
   <span
     @click="$emit('action')"
     v-html="symbol"
-    :class="concatClass"
+    :class="uiClass"
     class="cursor-point"
   ></span>
 </template>

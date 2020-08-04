@@ -11,14 +11,12 @@
         <h3 class="m-0">{{note.name | replaceText(noteNameMaxSymbol)}}</h3>
         <div v-if="noteActive === index" class="note-title-action">
           <Icon
-            :symbol="icon.edit"
-            @action="$router.push({name: 'Note', params: { id: (++index).toString() }})"
-            class="text-primary mr-2"
-          ></Icon>
-          <Icon
-            :symbol="icon.remove"
-            @action="modalOpen(index)"
-            class="text-danger"
+            v-for="icon in icons"
+            :key="icon.symbol"
+            :symbol="icon.symbol"
+            :ui="{className: icon.className}"
+            @action="icon.handler(index)"
+            class="mr-2"
           ></Icon>
         </div>
       </div>
@@ -65,12 +63,20 @@ export default {
   data () {
     return {
       todoList: {
-        mutable: false,
-        checkboxColor: 'success'
+        mutable: false
       },
-      icon: {
-        edit: '&#9998;',
-        remove: '&#10539;'
+      iconClass: 'color',
+      icons: {
+        edit: {
+          symbol: '&#9998;',
+          handler: this.noteCurrentEdit,
+          className: 'text-success'
+        },
+        remove: {
+          symbol: '&#10539;',
+          handler: this.modalOpen,
+          className: 'text-danger'
+        }
       },
       noteNameMaxSymbol: 12,
       noteActive: null,
@@ -93,6 +99,10 @@ export default {
     modalAccept () {
       this.$emit('noteRemove', this.noteCurrentIndex)
       this.modalClose()
+    },
+    noteCurrentEdit (index) {
+      const params = { id: (++index).toString() }
+      this.$router.push({ name: 'Note', params })
     }
   }
 }
