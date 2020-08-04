@@ -1,20 +1,16 @@
 export const ui = {
   props: {
-    ui: {
-      type: Object,
-      default () {
-        return {
-          className: 'initial'
-        }
-      }
+    className: {
+      type: String,
+      default: 'initial'
     }
   },
   computed: {
-    uiClass () {
-      const classes = {}
-      const className = this.ui.className
-      classes[className] = className
-      return classes
+    classMap () {
+      const classMap = {}
+      const className = this.className
+      classMap[className] = className
+      return classMap
     }
   }
 }

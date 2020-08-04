@@ -14,7 +14,7 @@
             v-for="icon in icons"
             :key="icon.symbol"
             :symbol="icon.symbol"
-            :ui="{className: icon.className}"
+            :class-name="icon.className"
             @action="icon.handler(index)"
             class="mr-2"
           ></Icon>

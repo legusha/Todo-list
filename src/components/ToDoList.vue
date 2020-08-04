@@ -13,7 +13,7 @@
         :id="checkboxId(index)"
         :label="todo.title | replaceText(titleMaxSymbol)"
         :class="{'cursor-init': !mutable}"
-        :ui="checkBoxUI"
+        :class-name="checkClassName"
       >
       </Checkbox>
     </li>
@@ -46,9 +46,7 @@ export default {
     return {
       missParents: ['ul', 'li'],
       titleMaxSymbol: 16,
-      checkBoxUI: {
-        className: 'checkbox-success'
-      }
+      checkClassName: 'checkbox-success'
     }
   },
   computed: {

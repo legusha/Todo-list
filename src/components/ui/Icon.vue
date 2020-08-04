@@ -2,7 +2,7 @@
   <span
     @click="$emit('action')"
     v-html="symbol"
-    :class="uiClass"
+    :class="classMap"
     class="cursor-point"
   ></span>
 </template>
