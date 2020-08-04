@@ -47,7 +47,7 @@ export default {
       missParents: ['ul', 'li'],
       titleMaxSymbol: 16,
       checkBoxUI: {
-        startClass: 'checkbox-',
+        element: 'checkbox',
         color: 'success'
       }
     }

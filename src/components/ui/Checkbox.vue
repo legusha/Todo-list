@@ -32,19 +32,6 @@ export default {
       type: String,
       default: ''
     }
-  },
-  data () {
-    return {
-      baseClass: 'checkbox-'
-    }
-  },
-  computed: {
-    classes () {
-      const classes = {}
-      const color = `${this.baseClass}${this.type}`
-      classes[color] = true
-      return classes
-    }
   }
 }
 </script>
