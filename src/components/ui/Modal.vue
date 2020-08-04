@@ -7,7 +7,10 @@
     <div class="container d-flex align-center">
       <div class="modal">
         <div class="modal-content border-secondary container">
-          <div class="modal-header text-black d-flex align-center justify-between bg-secondary p-3">
+          <div
+            :class="classMap"
+            class="modal-header text-black d-flex align-center justify-between p-3"
+          >
             <slot name="header"></slot>
             <span
               class="close"
@@ -29,8 +32,10 @@
 </template>
 
 <script>
+import { classDynamic } from '@/mixin'
 export default {
   name: 'Modal',
+  mixins: [classDynamic],
   props: {
     active: {
       type: Boolean,

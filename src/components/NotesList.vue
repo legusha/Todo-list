@@ -11,14 +11,12 @@
         <h3 class="m-0">{{note.name | replaceText(noteNameMaxSymbol)}}</h3>
         <div v-if="noteActive === index" class="note-title-action">
           <Icon
-            :symbol="icon.edit"
-            @action="$router.push({name: 'Note', params: { id: (++index).toString() }})"
-            class="text-primary mr-2"
-          ></Icon>
-          <Icon
-            :symbol="icon.remove"
-            @action="modalOpen(index)"
-            class="text-danger"
+            v-for="icon in icons"
+            :key="icon.symbol"
+            :symbol="icon.symbol"
+            :class-name="icon.className"
+            @action="icon.handler(index)"
+            class="mr-2"
           ></Icon>
         </div>
       </div>
@@ -27,7 +25,6 @@
           :id="index.toString()"
           :list="note.todoList"
           :mutable="todoList.mutable"
-          :checkboxType="todoList.checkboxType"
           @action="toDoListAction"
         ></ToDoList>
         <p v-if="note.todoList.length === 0" class="m-0">Empty todo list</p>
@@ -47,7 +44,7 @@
       <template slot="footer">
         <div>
           <button @click="modalClose" type="button" class="btn-primary mr-4">Cancel</button>
-          <button @click="$emit('noteRemove', noteCurrentIndex)" type="button" class="btn-success">Accept</button>
+          <button @click="modalAccept" type="button" class="btn-success">Accept</button>
         </div>
       </template>
     </Modal>
@@ -66,12 +63,20 @@ export default {
   data () {
     return {
       todoList: {
-        mutable: false,
-        checkboxType: 'success'
+        mutable: false
       },
-      icon: {
-        edit: '&#9998;',
-        remove: '&#10539;'
+      iconClass: 'color',
+      icons: {
+        edit: {
+          symbol: 'fa fa-pencil',
+          handler: this.noteCurrentEdit,
+          className: 'text-success'
+        },
+        remove: {
+          symbol: 'fa fa-times',
+          handler: this.modalOpen,
+          className: 'text-danger'
+        }
       },
       noteNameMaxSymbol: 12,
       noteActive: null,
@@ -90,6 +95,14 @@ export default {
     modalOpen (index) {
       this.noteCurrentIndex = index
       this.modalActive = true
+    },
+    modalAccept () {
+      this.$emit('noteRemove', this.noteCurrentIndex)
+      this.modalClose()
+    },
+    noteCurrentEdit (index) {
+      const params = { id: (++index).toString() }
+      this.$router.push({ name: 'Note', params })
     }
   }
 }

@@ -1,56 +1,35 @@
+import { NoteStorage } from '@/utils/storage'
+
+const noteStorageKeyName = 'note-list'
+const noteStorage = new NoteStorage(noteStorageKeyName)
+
+const exampleNoteList = [
+  {
+    name: 'My future plans',
+    todoList: [
+      {
+        title: 'Learn Node.js',
+        status: false
+      },
+      {
+        title: 'Learn PHP',
+        status: false
+      },
+      {
+        title: 'Learn Laravel',
+        status: false
+      }
+    ]
+  }
+]
+
+if (noteStorage.read().length === 0) {
+  noteStorage.write(exampleNoteList)
+}
+
 export default {
   state: {
-    notesList: [
-      {
-        name: 'Notes name',
-        todoList: [
-          {
-            status: true,
-            title: 'Todo'
-          }
-        ]
-      },
-      {
-        name: 'Notes name a very big name',
-        todoList: [
-          {
-            status: true,
-            title: 'Todo'
-          }
-        ]
-      },
-      {
-        name: 'Notes name a very avery big big name and text',
-        todoList: [
-          {
-            status: true,
-            title: 'Todo'
-          }
-        ]
-      },
-      {
-        name: 'Notes name',
-        todoList: [
-          {
-            status: true,
-            title: 'Todo'
-          },
-          {
-            status: false,
-            title: 'Todo2'
-          }
-        ]
-      },
-      {
-        name: 'Notes name',
-        todoList: [
-          {
-            status: false,
-            title: 'Its a very very big to do name and other text'
-          }
-        ]
-      }
-    ],
+    notesList: noteStorage.read(),
     noteCurrent: null
   },
   getters: {
@@ -64,12 +43,15 @@ export default {
         todoList: []
       }
       state.notesList.unshift(newNote)
+      noteStorage.write(state.notesList)
     },
     removeNote (state, { index }) {
       state.notesList.splice(index, 1)
+      noteStorage.write(state.notesList)
     },
     updateNote (state, { index, note }) {
       state.notesList.splice(index, 1, note)
+      noteStorage.write(state.notesList)
     },
     writeNoteCurrent (state, note) {
       note = JSON.parse(JSON.stringify(note)) // disable reactivity

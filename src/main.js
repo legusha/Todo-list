@@ -5,6 +5,9 @@ import router from '@/router'
 import './registerServiceWorker'
 
 import '@/assets/scss/main.scss'
+import '@/assets/css/font-awesome.min.css'
+
+import filter from '@/filters'
 
 import ToDoList from '@/components/ToDoList'
 import Modal from '@/components/ui/Modal'
@@ -18,14 +21,7 @@ Vue.component('Icon', Icon)
 
 /** Global filters **/
 
-Vue.filter('replaceText', function (value, maxSymbol) {
-  const startValueIndex = 0
-  if (!value) return ''
-  if (value.length >= maxSymbol) {
-    return `${value.substring(startValueIndex, maxSymbol)}...`
-  }
-  return value
-})
+Vue.filter('replaceText', filter.replaceText)
 
 /** Init instance Vue **/
 

@@ -3,7 +3,7 @@
     <input
       :id="id"
       :checked="checked"
-      :class="classes"
+      :class="classMap"
       class="checkbox"
       type="checkbox"
     >
@@ -12,8 +12,10 @@
 </template>
 
 <script>
+import { classDynamic } from '@/mixin'
 export default {
   name: 'Checkbox',
+  mixins: [classDynamic],
   model: {
     prop: 'checked'
   },
@@ -29,23 +31,6 @@ export default {
     label: {
       type: String,
       default: ''
-    },
-    type: {
-      type: String,
-      default: 'success'
-    }
-  },
-  data () {
-    return {
-      baseClass: 'checkbox-'
-    }
-  },
-  computed: {
-    classes () {
-      const classes = {}
-      const color = `${this.baseClass}${this.type}`
-      classes[color] = true
-      return classes
     }
   }
 }
