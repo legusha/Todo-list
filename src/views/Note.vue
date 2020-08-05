@@ -37,7 +37,43 @@
       </template>
       <template slot="footer">
         <div>
-          <button @click="modals.ok.accept(modals.ok)" type="button" class="btn-success">OK</button>
+          <button @click="modalAccept(modals.ok)" type="button" class="btn-success">OK</button>
+        </div>
+      </template>
+    </Modal>
+    <Modal
+      v-if="modals.remove.active"
+      :active="modals.remove.active"
+      @close="modals.remove.close(modals.remove)"
+    >
+      <template slot="header">
+        <h2 class="m-0">Question:</h2>
+      </template>
+      <template slot="body">
+        <h2>Are you sure you want to delete the note?</h2>
+      </template>
+      <template slot="footer">
+        <div>
+          <button @click="modals.remove.close(modals.remove)" type="button" class="btn-primary ml-2">Cancel</button>
+          <button @click="modalAccept(modals.remove)" type="button" class="btn-success">OK</button>
+        </div>
+      </template>
+    </Modal>
+    <Modal
+      v-if="modals.disableEdit.active"
+      :active="modals.disableEdit.active"
+      @close="modals.disableEdit.close(modals.disableEdit)"
+    >
+      <template slot="header">
+        <h2 class="m-0">Question:</h2>
+      </template>
+      <template slot="body">
+        <h2>Warning! You will not be able to edit Todo list?</h2>
+      </template>
+      <template slot="footer">
+        <div>
+          <button @click="modals.disableEdit.close(modals.disableEdit)" type="button" class="btn-primary ml-2">Cancel</button>
+          <button @click="modalAccept(modals.disableEdit)" type="button" class="btn-success">OK</button>
         </div>
       </template>
     </Modal>
@@ -55,29 +91,47 @@ export default {
       },
       noteNameMaxSymbol: 36,
       icons: {
-        edit: {
+        undoEdit: {
+          symbol: 'fa fa-share',
+          handler: this.undoChangeNote,
+          className: 'text-primary'
+        },
+        disableEdit: {
           symbol: 'fa fa-pencil',
-          handler: this.saveNote,
+          handler: this.modalOpen.bind(this, 'disableEdit', this.changeEditTodoList, []),
+          className: 'text-primary'
+        },
+        save: {
+          symbol: 'fa fa-floppy-o',
+          handler: this.modalOpen.bind(this, 'ok', this.saveNote, []),
           className: 'text-success'
         },
         remove: {
           symbol: 'fa fa-times',
-          handler: this.removeFromNotesList,
+          handler: this.modalOpen.bind(this, 'remove', this.removeFromNotesList, [this.index]),
           className: 'text-danger'
         }
       },
       modalActive: false,
+      modalCurrentHandler: null,
       modals: {
         ok: {
           active: false,
-          close: this.modalClose,
-          accept: this.modalAccept
+          close: this.modalClose
+        },
+        remove: {
+          active: false,
+          close: this.modalClose
+        },
+        disableEdit: {
+          active: false,
+          close: this.modalClose
         }
       }
     }
   },
   computed: {
-    ...mapGetters(['noteCurrent']),
+    ...mapGetters(['noteCurrent', 'notesList']),
     index () {
       const radix = 10
       return parseInt(this.$route.params.id, radix) - 1
@@ -87,7 +141,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['updateNote', 'removeNote']),
+    ...mapMutations(['updateNote', 'removeNote', 'writeNoteCurrent']),
     toDoListAction (list = []) {
       console.log(list)
     },
@@ -98,11 +152,26 @@ export default {
     },
     removeFromNotesList (index) {
       this.removeNote({ index })
+      this.$router.push({ name: 'Main' })
+    },
+    undoChangeNote () {
+      const note = this.notesList[this.index]
+      this.writeNoteCurrent(note)
+    },
+    changeEditTodoList () {
+      this.toggleEditTodoList()
+    },
+    toggleEditTodoList () {
+      this.todoList.mutable = !this.todoList.mutable
     },
     modalAccept (modal) {
-      const action = modal.action
-      if (action) modal.action()
+      const handler = this.modalCurrentHandler
+      if (handler) handler()
       modal.active = !modal.active
+    },
+    modalOpen (key = 'ok', handler = () => {}, args = []) {
+      this.modals[key].active = true
+      this.modalCurrentHandler = handler.bind(this, ...args)
     },
     modalClose (modal) {
       modal.active = !modal.active
