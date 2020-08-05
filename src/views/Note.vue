@@ -25,9 +25,9 @@
       </div>
     </div>
     <Modal
-      v-if="modalActive"
-      :active="modalActive"
-      @close="modalClose"
+      v-if="modals.ok.active"
+      :active="modals.ok.active"
+      @close="modals.ok.close(modals.ok)"
     >
       <template slot="header">
         <h2 class="m-0">Success:</h2>
@@ -36,8 +36,8 @@
         <h2>Your note has been saved!</h2>
       </template>
       <template slot="footer">
-        <div v-html="modals.ok.content.footer">
-<!--          <button @click="modalAccept" type="button" class="btn-success">OK</button>-->
+        <div>
+          <button @click="modals.ok.accept(modals.ok)" type="button" class="btn-success">OK</button>
         </div>
       </template>
     </Modal>
@@ -69,13 +69,9 @@ export default {
       modalActive: false,
       modals: {
         ok: {
+          active: false,
           close: this.modalClose,
-          accept: this.modalAccept,
-          content: {
-            header: '<h2 class="m-0">Success:</h2>',
-            body: '<h2>Your note has been saved!</h2>',
-            footer: `<button @click="${this.modalAccept}" type="button" class="btn-success">OK</button>`
-          }
+          accept: this.modalAccept
         }
       }
     }
@@ -96,17 +92,20 @@ export default {
       console.log(list)
     },
     saveNote () {
-      this.modalActive = true
       const noteData = { index: this.index, note: this.note }
       this.updateNote(noteData)
+      this.modals.ok.active = true
     },
     removeFromNotesList (index) {
       this.removeNote({ index })
     },
-    modalAccept () {
-      this.modalActive = false
+    modalAccept (modal) {
+      const action = modal.action
+      if (action) modal.action()
+      modal.active = !modal.active
     },
-    modalClose () {
+    modalClose (modal) {
+      modal.active = !modal.active
     }
   }
 }

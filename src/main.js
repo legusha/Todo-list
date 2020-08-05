@@ -5,6 +5,7 @@ import router from '@/router'
 import './registerServiceWorker'
 
 import '@/assets/scss/main.scss'
+import '@/assets/css/font-awesome.min.css'
 
 import filter from '@/filters'
 
