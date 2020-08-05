@@ -1,8 +1,7 @@
 <template>
   <span
     @click="$emit('action')"
-    v-html="symbol"
-    :class="classMap"
+    :class="{...classMap, [symbol]: symbol}"
     class="cursor-point"
   ></span>
 </template>

@@ -56,12 +56,12 @@ export default {
       noteNameMaxSymbol: 36,
       icons: {
         edit: {
-          symbol: '&#9998;',
+          symbol: 'fa fa-pencil',
           handler: this.saveNote,
           className: 'text-success'
         },
         remove: {
-          symbol: '&#10539;',
+          symbol: 'fa fa-times',
           handler: this.removeFromNotesList,
           className: 'text-danger'
         }

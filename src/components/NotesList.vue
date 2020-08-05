@@ -68,12 +68,12 @@ export default {
       iconClass: 'color',
       icons: {
         edit: {
-          symbol: '&#9998;',
+          symbol: 'fa fa-pencil',
           handler: this.noteCurrentEdit,
           className: 'text-success'
         },
         remove: {
-          symbol: '&#10539;',
+          symbol: 'fa fa-times',
           handler: this.modalOpen,
           className: 'text-danger'
         }
