@@ -7,10 +7,10 @@
 </template>
 
 <script>
-import { ui } from '@/mixin'
+import { classDynamic } from '@/mixin'
 export default {
   name: 'Icon',
-  mixins: [ui],
+  mixins: [classDynamic],
   props: {
     symbol: {
       type: String,

@@ -12,10 +12,10 @@
 </template>
 
 <script>
-import { ui } from '@/mixin'
+import { classDynamic } from '@/mixin'
 export default {
   name: 'Checkbox',
-  mixins: [ui],
+  mixins: [classDynamic],
   model: {
     prop: 'checked'
   },

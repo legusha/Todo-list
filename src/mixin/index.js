@@ -1,4 +1,4 @@
-export const ui = {
+export const classDynamic = {
   props: {
     className: {
       type: String | Array,

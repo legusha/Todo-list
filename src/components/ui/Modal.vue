@@ -32,10 +32,10 @@
 </template>
 
 <script>
-import { ui } from '@/mixin'
+import { classDynamic } from '@/mixin'
 export default {
   name: 'Modal',
-  mixins: [ui],
+  mixins: [classDynamic],
   props: {
     active: {
       type: Boolean,
