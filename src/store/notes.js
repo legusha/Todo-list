@@ -1,3 +1,10 @@
+import { NoteStorage } from '@/utils/storage'
+
+const noteStorageKeyName = 'note-list'
+const noteStorage = new NoteStorage(noteStorageKeyName)
+noteStorage.write({ A: 123 })
+console.log(noteStorage.read())
+
 export default {
   state: {
     notesList: [
