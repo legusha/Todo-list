@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'InputAdd',
+  name: 'Input',
   props: {
     placeholder: {
       type: String,
@@ -24,13 +24,24 @@ export default {
   },
   data () {
     return {
-      name: this.value
+      nameLocal: ''
+    }
+  },
+  computed: {
+    name: {
+      get () {
+        return this.value
+      },
+      set (val) {
+        this.nameLocal = val
+        this.$emit('input', val)
+      }
     }
   },
   methods: {
     submit () {
-      if (this.name.length === 0) return
-      this.$emit('submit', this.name)
+      if (this.nameLocal.length === 0) return
+      this.$emit('submit', this.nameLocal)
       this.name = ''
     }
   }

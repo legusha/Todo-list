@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import NotesAdd from '@/components/ui/InputAdd'
+import NotesAdd from '@/components/ui/Input'
 import NotesList from '@/components/NotesList'
 import { mapGetters, mapMutations } from 'vuex'
 

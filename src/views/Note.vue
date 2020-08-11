@@ -16,9 +16,10 @@
       </div>
       <div class="card-body note-body">
         <InputAdd
-          :placeholder="inputAddOption.placeholder"
-          :text="inputAddOption.text"
-          :value="inputAddOption.value"
+          :placeholder="inputOption.placeholder"
+          :text="inputOption.text"
+          :value="inputOption.value"
+          @submit="inputAddAction"
         >
         </InputAdd>
         <ToDoList
@@ -26,6 +27,8 @@
           :list="note.todoList"
           :mutable="todoList.mutable"
           @action="toDoListAction"
+          @action:edit="toDoListActionEdit"
+          @action:remove="toDoListActionRemove"
         ></ToDoList>
         <p v-if="note.todoList.length === 0" class="m-0">Empty todo list</p>
       </div>
@@ -59,7 +62,7 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
-import InputAdd from '@/components/ui/InputAdd'
+import InputAdd from '@/components/ui/Input'
 export default {
   name: 'Note',
   components: {
@@ -165,10 +168,19 @@ export default {
           }
         }
       ],
-      inputAddOption: {
+      inputOptionAdd: {
         placeholder: 'Please enter todo list name',
         text: 'Add',
         value: ''
+      },
+      inputOptionEdit: {
+        placeholder: 'Please change todo list name',
+        text: 'Save',
+        value: ''
+      },
+      inputActionEdit: {
+        apply: false,
+        index: null
       }
     }
   },
@@ -180,12 +192,26 @@ export default {
     },
     note () {
       return this.noteCurrent
+    },
+    inputOption () {
+      if (this.inputActionEdit.apply) {
+        return this.inputOptionEdit
+      }
+      return this.inputOptionAdd
     }
   },
   methods: {
     ...mapMutations(['updateNote', 'removeNote', 'writeNoteCurrent']),
     toDoListAction (list = []) {
       console.log(list)
+    },
+    toDoListActionEdit ({ list, index }) {
+      this.inputOptionEdit.value = list[index].title
+      this.inputActionEdit.index = index
+      this.inputActionEdit.apply = true
+    },
+    toDoListActionRemove ({ list, index }) {
+      list.splice(index, 1)
     },
     saveNoteTemp (note) {
       this.noteTemp = JSON.parse(JSON.stringify(note))
@@ -220,6 +246,23 @@ export default {
     },
     modalClose () {
       this.modalActive = false
+    },
+    inputAddAction (value) {
+      if (!this.todoList.mutable) return
+      // edit item in todolist
+      if (this.inputActionEdit.apply) {
+        const index = this.inputActionEdit.index
+        this.note.todoList[index].title = value
+        this.inputActionEdit.apply = false
+        return
+      }
+      // added item in todolist
+      const newTodoItem = {
+        status: false,
+        title: value
+      }
+      this.note.todoList.unshift(newTodoItem)
+      this.inputOptionAdd.value = ''
     }
   },
   created () {
