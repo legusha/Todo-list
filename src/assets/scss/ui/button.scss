@@ -18,6 +18,10 @@
   box-shadow: $secondary-shadow;
   cursor: pointer;
 }
+.btn[disabled] {
+  opacity: .7;
+  cursor: initial;
+}
 .btn-big {
   padding: 14px 18px;
   font-size: 16px;

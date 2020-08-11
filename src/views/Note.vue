@@ -19,6 +19,7 @@
           :placeholder="inputOption.placeholder"
           :text="inputOption.text"
           :value="inputOption.value"
+          :disabled="!todoList.mutable"
           @submit="inputSubmit"
           @input="val => inputOption.value = val"
         >

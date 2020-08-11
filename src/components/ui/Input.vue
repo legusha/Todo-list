@@ -1,7 +1,17 @@
 <template>
   <form @submit.prevent="submit" class="p-4 border-secondary text-left d-flex justify-between">
-    <input v-model="name" type="text"  class="input-primary input-big mr-4" :placeholder="placeholder">
-    <button class="btn-outline-success btn-big text-black bg-white" type="submit">{{text}}</button>
+    <input
+      v-model="name"
+      :placeholder="placeholder"
+      :disabled="disabled"
+      type="text"
+      class="input-primary input-big mr-4"
+    >
+    <button
+      :disabled="disabled"
+      class="btn-outline-success btn-big text-black bg-white"
+      type="submit"
+    >{{text}}</button>
   </form>
 </template>
 
@@ -20,6 +30,10 @@ export default {
     value: {
       type: String,
       default: ''
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
