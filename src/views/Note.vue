@@ -15,13 +15,14 @@
         </div>
       </div>
       <div class="card-body note-body">
-        <InputAdd
+        <InputAction
           :placeholder="inputOption.placeholder"
           :text="inputOption.text"
           :value="inputOption.value"
-          @submit="inputAddAction"
+          @submit="inputSubmit"
+          @input="val => inputOption.value = val"
         >
-        </InputAdd>
+        </InputAction>
         <ToDoList
           :id="index.toString()"
           :list="note.todoList"
@@ -62,11 +63,11 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
-import InputAdd from '@/components/ui/Input'
+import InputAction from '@/components/ui/Input'
 export default {
   name: 'Note',
   components: {
-    InputAdd
+    InputAction
   },
   data () {
     return {
@@ -211,6 +212,8 @@ export default {
       this.inputActionEdit.apply = true
     },
     toDoListActionRemove ({ list, index }) {
+      this.inputOptionAdd.value = this.inputOptionEdit.value = ''
+      this.inputActionEdit.apply = false
       list.splice(index, 1)
     },
     saveNoteTemp (note) {
@@ -247,7 +250,7 @@ export default {
     modalClose () {
       this.modalActive = false
     },
-    inputAddAction (value) {
+    inputSubmit (value) {
       if (!this.todoList.mutable) return
       // edit item in todolist
       if (this.inputActionEdit.apply) {
