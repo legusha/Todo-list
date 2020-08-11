@@ -9,7 +9,7 @@
     <component
       :is="currentView"
       v-bind="{ list: notesList}"
-      @noteAdd="addToNotesList"
+      @submit="addToNotesList"
       @noteRemove="removeFromNotesList"
       class="border-secondary"
     ></component>
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import NotesAdd from '@/components/NotesAdd'
+import NotesAdd from '@/components/ui/InputAdd'
 import NotesList from '@/components/NotesList'
 import { mapGetters, mapMutations } from 'vuex'
 

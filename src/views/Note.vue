@@ -15,6 +15,12 @@
         </div>
       </div>
       <div class="card-body note-body">
+        <InputAdd
+          :placeholder="inputAddOption.placeholder"
+          :text="inputAddOption.text"
+          :value="inputAddOption.value"
+        >
+        </InputAdd>
         <ToDoList
           :id="index.toString()"
           :list="note.todoList"
@@ -53,8 +59,12 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
+import InputAdd from '@/components/ui/InputAdd'
 export default {
   name: 'Note',
+  components: {
+    InputAdd
+  },
   data () {
     return {
       todoList: {
@@ -154,7 +164,12 @@ export default {
             ]
           }
         }
-      ]
+      ],
+      inputAddOption: {
+        placeholder: 'Please enter todo list name',
+        text: 'Add',
+        value: ''
+      }
     }
   },
   computed: {
