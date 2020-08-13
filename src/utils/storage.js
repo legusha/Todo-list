@@ -34,7 +34,8 @@ class NoteStorage extends LocalStorage {
     this.#key = keyName
   }
 
-  read (key = this.#key) {
+  read () {
+    const key = this.#key
     const res = this.storage.getItem(key)
     if (res) {
       return JSON.parse(res)
@@ -42,13 +43,15 @@ class NoteStorage extends LocalStorage {
     return []
   }
 
-  write (value = '', key = this.#key) {
+  write (value = '') {
+    const key = this.#key
     this.storage.setItem(key, JSON.stringify(value))
     return this
   }
 
-  delete (key = this.#key) {
-    this.storage.removeItem(this.#key)
+  delete () {
+    const key = this.#key
+    this.storage.removeItem(key)
     return this
   }
 
