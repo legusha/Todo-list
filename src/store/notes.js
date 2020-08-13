@@ -3,30 +3,6 @@ import { NoteStorage } from '@/utils/storage'
 const noteStorageKeyName = 'note-list'
 const noteStorage = new NoteStorage(noteStorageKeyName)
 
-const exampleNoteList = [
-  {
-    name: 'My future plans',
-    todoList: [
-      {
-        title: 'Learn Node.js',
-        status: false
-      },
-      {
-        title: 'Learn PHP',
-        status: false
-      },
-      {
-        title: 'Learn Laravel',
-        status: false
-      }
-    ]
-  }
-]
-
-if (noteStorage.read().length === 0) {
-  noteStorage.write(exampleNoteList)
-}
-
 export default {
   state: {
     notesList: noteStorage.read(),
@@ -54,7 +30,7 @@ export default {
       noteStorage.write(state.notesList)
     },
     writeNoteCurrent (state, note) {
-      note = JSON.parse(JSON.stringify(note)) // disable reactivity
+      note = JSON.parse(JSON.stringify(note)) // disable reactive link
       state.noteCurrent = note
     }
   }

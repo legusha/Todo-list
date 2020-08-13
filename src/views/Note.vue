@@ -48,8 +48,8 @@
       </template>
       <template slot="footer">
         <button
-          v-for="(button, index) in modalCurrentContent.footer.buttons"
-          :key="index"
+          v-for="(button, i) in modalCurrentContent.footer.buttons"
+          :key="i"
           :class="{[button.className]: button.className}"
           @click="button.handler(index, note)"
           type="button"
