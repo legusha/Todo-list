@@ -217,13 +217,13 @@ export default {
       this.inputActionEdit.apply = false
       list.splice(index, 1)
     },
-    saveNoteTemp (note) {
-      this.noteTemp = JSON.parse(JSON.stringify(note))
-    },
     saveNote () {
       const noteData = { index: this.index, note: this.note }
       this.updateNote(noteData)
       this.modalClose()
+    },
+    saveNoteTemp (note) {
+      this.noteTemp = JSON.parse(JSON.stringify(note))
     },
     removeFromNotesList (index) {
       this.removeNote({ index })
